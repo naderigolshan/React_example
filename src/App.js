@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import {create} from 'jss';
+import rtl from 'jss-rtl';
+import {StylesProvider, jssPreset} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
+import CustomTheme from "./assets/CustomTheme";
+import './assets/styles.css'
+import {Typography} from "@material-ui/core";
+import Header from "./components/header_footer/Header";
+import Product from "./components/products";
+import ProductInfo from "./components/pro_info";
+import Highlights from "./components/highlights";
+import Pricing from "./components/pricing";
+import Location from "./components/location";
+import Footer from "./components/header_footer/Footer";
+import {Element} from "react-scroll";
+
+// Configure JSS
+const jss = create({plugins: [...jssPreset().plugins, rtl()]});
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={CustomTheme}>
+            <StylesProvider jss={jss}>
+                <Header/>
+                <Element name="Product">
+                    <Product/>
+                </Element>
+                <Element name="ProductInfo">
+                    <ProductInfo/>
+                </Element>
+                <Element name="Highlights">
+                    <Highlights/>
+                </Element>
+                <Element name="Pricing">
+                    <Pricing />
+                </Element>
+                <Element name="Location">
+                    <Location />
+                </Element>
+
+                {/*<Product/>*/}
+                {/*<ProductInfo/>*/}
+                {/*<Highlights/>*/}
+                {/*<Pricing />*/}
+                {/*<Location />*/}
+                <Footer />
+
+                <Typography variant="body1">
+
+                </Typography>
+
+            </StylesProvider>
+        </ThemeProvider>
+
+    );
 }
 
 export default App;
